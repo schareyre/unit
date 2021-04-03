@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+namespace src;
 
 final class Email {
 	
@@ -24,7 +25,7 @@ final class Email {
 	private function ensureIsValidEmail(string $email) : void {
 		
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('"%s" is not a valid email adress', $email));
 		}
 		

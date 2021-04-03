@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
-require __DIR__ . "/../src/Email.php";
+//require __DIR__ . "/../src/Email.php";
 
 
 use PHPUnit\Framework\TestCase;
+use src\Email;
 
 final class EmailTest extends TestCase {
 	
