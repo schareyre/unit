@@ -22,7 +22,7 @@ final class BcsortTest extends TestCase {
 	
 	//private $sort;
 	
-	public function testSort() : void {
+	public function testSort() : Bcsort {
 		
 		/*$this->assertSame(3,3);
 		$this->assertEquals('3', 3);*/
@@ -36,22 +36,24 @@ final class BcsortTest extends TestCase {
 		
 		shuffle($tickets);
 		
-		$this->sort = new Bcsort($tickets);
-		$this->sort->sort();
+		$sort = new Bcsort($tickets);
+		$sort->sort();
 		
 		$this->assertEquals([
 			new Travel(new Station('Madrid'), new Station('Barcelona'), new Train('78A', new Seat(45, 'B'))),
 			new Travel(new Station('Barcelona'), new Station('Genova Airport'), new Bus()),
 			new Travel(new Station('Genova Airport'), new Station('Stockholm'), new Flight('SK455', new Seat(3, 'A'), '45B', ' Baggage drop at ticket counter 344')),
 			new Travel(new Station('Stockholm'), new Station('New York JFK'), new Flight('SK22', new Seat(7, 'B'), '22', ' Baggage will be automatically transferred from your last leg'))
-		], $this->sort->getsortedTickets());
+		], $sort->getsortedTickets());
+		
+		return $sort;
 		
 	}
 	
 	/**
 	 * @depends testSort
 	 */
-	public function testRender() : void {
+	public function testRender(Bcsort $sort) : void {
 		$expected = [
 			'Take train 78A from Madrid to Barcelona. Sit in seat 45B.',
 			'Take the airport bus from Barcelona to Genova Airport. No seat assignment.',
@@ -60,7 +62,7 @@ final class BcsortTest extends TestCase {
 			'You have arrived at your final destination.'
 		];
 		
-		$tickets = [
+		/*$tickets = [
 			new Travel(new Station('Barcelona'), new Station('Genova Airport'), new Bus()),
 			new Travel(new Station('Stockholm'), new Station('New York JFK'), new Flight('SK22', new Seat(7, 'B'), '22', ' Baggage will be automatically transferred from your last leg')),
 			new Travel(new Station('Genova Airport'), new Station('Stockholm'), new Flight('SK455', new Seat(3, 'A'), '45B', ' Baggage drop at ticket counter 344')),
@@ -70,9 +72,10 @@ final class BcsortTest extends TestCase {
 		shuffle($tickets);
 		
 		$this->sort = new Bcsort($tickets);
-		$this->sort->sort();
+		$this->sort->sort();*/
 		
-		$this->assertSame($expected, $this->sort->render());
+		
+		$this->assertSame($expected, $sort->render());
 		
 	}
 	
